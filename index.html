@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>기후 위기! 인류의 미래를 지켜라</title>
+    <!-- 구글 폰트 및 아이콘 -->
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #f7f9fc;
+            --main-color: #5c8374;
+            --sub-color: #93b5c6;
+            --text-color: #2f3e46;
+            --white: #ffffff;
+            --accent-fire: #e07a5f;
+            --accent-ice: #81b29a;
+            --chat-bg: #e2ecf4;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Pretendard', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            position: relative;
+        }
+
+        /* 배경 경각심 이모지 효과 */
+        .eco-bg-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.15;
+            overflow: hidden;
+        }
+        .floating-emoji {
+            position: absolute;
+            font-size: 2rem;
+            animation: float 10s infinite alternate ease-in-out;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            100% { transform: translateY(-30px) rotate(15deg); }
+        }
+
+        /* 헤더 및 네비게이션 */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+        .logo {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--main-color);
+        }
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 600;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        nav ul li a:hover {
+            color: var(--main-color);
+        }
+
+        /* 메인 컨테이너 */
+        main {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .section {
+            display: none;
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+            margin-bottom: 2rem;
+        }
+        .section.active {
+            display: block;
+        }
+
+        /* 메인 홈 화면 스타일 */
+        .hero {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(240,244,248,0.9)), url('https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?auto=format&fit=crop&w=1200&q=80') no-repeat center center/cover;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
+        .hero h1 {
+            font-size: 2.5rem;
+            color: var(--text-color);
+            margin-bottom: 1rem;
+        }
+        .hero p {
+            font-size: 1.2rem;
+            color: #555;
+            margin-bottom: 2rem;
+        }
+        .hero-badge {
+            display: inline-block;
+            background: var(--accent-fire);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        /* 공통 타이틀 */
+        h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--main-color);
+            border-bottom: 2px solid #eee;
+            padding-bottom: 0.5rem;
+        }
+
+        /* 게시판 및 일반 폼 스타일 */
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+        button.submit-btn {
+            background-color: var(--main-color);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        button.submit-btn:hover {
+            background-color: #436456;
+        }
+
+        .post-list {
+            margin-top: 2rem;
+            border-top: 1px solid #eee;
+            padding-top: 1rem;
+        }
+        .post-item {
+            background: #f9fbfc;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--sub-color);
+        }
+
+        /* 📁 학습 자료실 업로드 박스 스타일 */
+        .upload-box {
+            background: #f9fbfc;
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px dashed #b0c4de;
+            margin-bottom: 1.5rem;
+        }
+        .file-list-container {
+            margin-top: 1.5rem;
+        }
+        .file-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #f0f4f8;
+            padding: 0.8rem 1rem;
+            border-radius: 8px;
+            margin-bottom: 0.8rem;
+        }
+        .file-item a {
+            color: var(--main-color);
+            font-weight: 600;
+            text-decoration: none;
+        }
+        .file-item a:hover {
+            text-decoration: underline;
+        }
+
+        /* 💬 메신저(카톡 스타일) 전용 디자인 */
+        .chat-room {
+            background-color: var(--chat-bg);
+            border-radius: 12px;
+            padding: 1.5rem;
+            height: 400px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid #d0dee8;
+        }
+        .chat-message {
+            display: flex;
+            flex-direction: column;
+            max-width: 75%;
+        }
+        .chat-message.other {
+            align-self: flex-start;
+        }
+        .chat-message.my {
+            align-self: flex-end;
+        }
+        .chat-sender {
+            font-size: 0.85rem;
+            color: #555;
+            margin-bottom: 0.2rem;
+            font-weight: 600;
+        }
+        .chat-bubble {
+            padding: 0.8rem 1rem;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            word-break: break-all;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+        .chat-message.other .chat-bubble {
+            background-color: var(--white);
+            color: var(--text-color);
+            border-top-left-radius: 2px;
+        }
+        .chat-message.my .chat-bubble {
+            background-color: #fee500;
+            color: #381e1f;
+            border-top-right-radius: 2px;
+        }
+        .chat-input-box {
+            display: flex;
+            gap: 0.5rem;
+        }
+        .chat-input-box input {
+            flex: 1;
+        }
+
+        /* 관리자(선생님) 전용 잠금 영역 스타일 */
+        .admin-lock-box {
+            text-align: center;
+            padding: 3rem;
+            background: #f0f4f8;
+            border-radius: 12px;
+            margin-top: 2rem;
+        }
+        .admin-content {
+            display: none;
+            margin-top: 2rem;
+        }
+
+        /* 반응형 디자인 */
+        @media(max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            nav ul {
+                gap: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 배경 경각심 요소 -->
+    <div class="eco-bg-elements">
+        <div class="floating-emoji" style="top: 10%; left: 5%;">🐻‍❄️</div>
+        <div class="floating-emoji" style="top: 20%; right: 10%;">🔥</div>
+        <div class="floating-emoji" style="top: 60%; left: 8%;">🧊</div>
+        <div class="floating-emoji" style="top: 80%; right: 15%;">🌲🔥</div>
+        <div class="floating-emoji" style="top: 40%; left: 85%;">🌍</div>
+    </div>
+
+    <!-- 헤더 내비게이션 -->
+    <header>
+        <div class="nav-container">
+            <div class="logo">🌿 기후위기 탐구반</div>
+            <nav>
+                <ul>
+                    <li><a onclick="showSection('home')">메인 페이지</a></li>
+                    <li><a onclick="showSection('guide')">탐구 안내</a></li>
+                    <li><a onclick="showSection('resources')">학습 자료실</a></li>
+                    <li><a onclick="showSection('gallery')">탐구 결과물</a></li>
+                    <li><a onclick="showSection('community')">소통 플랫폼</a></li>
+                    <li><a onclick="showSection('review')">오늘의 일기</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 콘텐츠 영역 -->
+    <main>
+        <!-- 1. 메인 페이지 -->
+        <section id="home" class="section active">
+            <div class="hero">
+                <div class="hero-badge">🦸‍♀️ 슈퍼우먼의 지구 구하기 프로젝트</div>
+                <h1>기후 위기! 인류의 미래를 지켜라</h1>
+                <p>고등학교 1학년 환경 동아리 부원들과 함께하는 우리들의 진지한 지구 살리기 여정</p>
+            </div>
+        </section>
+
+        <!-- 2. 탐구 안내 -->
+        <section id="guide" class="section">
+            <h2>탐구 안내</h2>
+            <p><strong>주제 설명:</strong> 현재 지구 곳곳에서 발생하는 기후 변화의 원인을 분석하고, 우리가 실천할 수 있는 해결 방안을 모색합니다.</p>
+            <br>
+            <p><strong>진행 일정:</strong> 3월 ~ 7월 (단계별 모둠 활동 및 최종 발표 진행)</p>
+            <br>
+            <p><strong>평가 기준:</strong> 참여도(30%), 탐구 보고서의 창의성(40%), 실천 가능성(30%)</p>
+        </section>
+
+        <!-- 3. 학습 자료실 (파일 업로드 기능 추가) -->
+        <section id="resources" class="section">
+            <h2>학습 자료실</h2>
+            <p>수업 참고 자료, 영상, 가이드 문서 등을 업로드하고 다운로드할 수 있는 공간입니다.</p>
+            
+            <!-- 파일 업로드 폼 -->
+            <div class="upload-box" style="margin-top: 1.5rem;">
+                <h3 style="font-size: 1.1rem; color: var(--main-color); margin-bottom: 1rem;">📤 자료 파일 업로드</h3>
+                <div class="form-group">
+                    <input type="text" id="fileTitle" placeholder="자료 제목 입력 (예: 1주차 기후변화 리포트)">
+                </div>
+                <div class="form-group">
+                    <input type="file" id="fileInput" style="border: none; padding: 0;">
+                </div>
+                <button class="submit-btn" onclick="uploadFile()">자료 등록하기</button>
+            </div>
+
+            <!-- 업로드된 자료 목록 -->
+            <div class="file-list-container">
+                <h3 style="font-size: 1.1rem; color: var(--text-color); margin-bottom: 1rem;">📁 등록된 학습 자료</h3>
+                <div id="fileList">
+                    <div class="file-item">
+                        <span>📄 IPCC 기후변화 보고서 요약본.pdf</span>
+                        <a href="https://www.ipcc.ch" target="_blank">다운로드/링크</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. 학생 탐구 결과물 (갤러리) -->
+        <section id="gallery" class="section">
+            <h2>학생 탐구 결과물 / 갤러리</h2>
+            <p>동아리 부원들이 작성한 포스터, 보고서, 활동 사진을 전시하는 공간입니다.</p>
+            <div style="margin-top: 1.5rem; text-align: center; padding: 3rem; background: #f0f4f8; border-radius: 8px; color: #666;">
+                📸 첫 번째 모둠 결과물이 곧 업로드될 예정입니다!
+            </div>
+        </section>
+
+        <!-- 5. 소통 플랫폼 (카톡 스타일 메신저) -->
+        <section id="community" class="section">
+            <h2>우리 같이 이야기 해볼까요? (메신저 톡)</h2>
+            <p>동아리 부원들과 실시간으로 아이디어를 나누고 수다를 떨 수 있는 오픈 챗 공간입니다.</p>
+            
+            <div class="chat-room" id="chatRoom">
+                <div class="chat-message other">
+                    <span class="chat-sender">김동아</span>
+                    <div class="chat-bubble">다들 이번 주 주제 아이디어 생각해 오셨나요? 🌿</div>
+                </div>
+                <div class="chat-message other">
+                    <span class="chat-sender">이환경</span>
+                    <div class="chat-bubble">저는 북극곰 보호 캠페인 포스터로 해보면 어떨까 해요!</div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <input type="text" id="chatName" placeholder="이름 (예: 1반 김철수)" style="max-width: 200px; margin-bottom: 0.5rem;">
+            </div>
+            <div class="chat-input-box">
+                <input type="text" id="chatInput" placeholder="메시지를 입력하세요..." onkeypress="checkEnter(event)">
+                <button class="submit-btn" onclick="sendChatMessage()">전송</button>
+            </div>
+        </section>
+
+        <!-- 6. 오늘의 일기 (학생 작성 공간 + 선생님 전용 확인 창) -->
+        <section id="review" class="section">
+            <h2>오늘의 일기 (비밀 리뷰)</h2>
+            <p>오늘 활동하며 느낀 점이나 선생님께 하고 싶은 비밀 이야기를 남겨주세요. (작성된 내용은 다른 학생들에게 보이지 않고 선생님만 볼 수 있습니다.)</p>
+            
+            <div style="background: #f9fbfc; padding: 1.5rem; border-radius: 12px; margin-top: 1.5rem; border: 1px solid #e1e8ed;">
+                <h3 style="font-size: 1.1rem; color: var(--main-color); margin-bottom: 1rem;">✍️ 일기 작성하기</h3>
+                <div class="form-group">
+                    <input type="text" id="reviewAuthor" placeholder="작성자 이름 (예: 1반 김환경)">
+                </div>
+                <div class="form-group">
+                    <textarea id="reviewContent" rows="4" placeholder="오늘의 소감이나 선생님께 전하고 싶은 비밀 이야기를 적어주세요..."></textarea>
+                </div>
+                <button class="submit-btn" onclick="addReview()">비밀 일기 제출하기</button>
+            </div>
+
+            <div id="adminLock" class="admin-lock-box">
+                <p style="margin-bottom: 1rem; font-weight: 600;">🔒 [선생님 전용] 제출된 일기 목록을 확인하려면 비밀번호를 입력하세요.</p>
+                <div class="form-group" style="max-width: 300px; margin: 0 auto 1rem auto;">
+                    <input type="password" id="adminPassword" placeholder="비밀번호 입력">
+                </div>
+                <button class="submit-btn" onclick="verifyAdmin()">선생님 모드 열기</button>
+            </div>
+
+            <div id="adminContent" class="admin-content">
+                <div style="background: #e8f4f1; padding: 1rem; border-radius: 8px; margin-bottom: 1.5rem; border-left: 4px solid var(--main-color);">
+                    ✅ <strong>인증 성공!</strong> 학생들이 제출한 비밀 일기 목록입니다. (선생님만 확인 가능)
+                </div>
+                <div class="post-list" id="reviewList">
+                    <div class="post-item">
+                        <strong>[제출] 1반 홍길동</strong><br>오늘 빙하가 녹는 영상을 보니 북극곰에게 너무 미안했어요. 앞으로 분리수거를 더 열심히 해야겠다고 다짐했습니다!
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 자바스크립트 기능 -->
+    <script>
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(sec => sec.classList.remove('active'));
+            
+            const target = document.getElementById(sectionId);
+            if (target) {
+                target.classList.add('active');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        // 📁 학습 자료실 파일 업로드 기능
+        function uploadFile() {
+            const titleInput = document.getElementById('fileTitle');
+            const fileInput = document.getElementById('fileInput');
+            const fileList = document.getElementById('fileList');
+
+            if (!titleInput.value || fileInput.files.length === 0) {
+                alert('자료 제목과 업로드할 파일을 모두 선택해 주세요!');
+                return;
+            }
+
+            const file = fileInput.files[0];
+            const fileURL = URL.createObjectURL(file); // 브라우저 내에서 파일을 열 수 있는 임시 링크 생성
+
+            const fileItem = document.createElement('div');
+            fileItem.className = 'file-item';
+            fileItem.innerHTML = `
+                <span>📄 ${titleInput.value} (${file.name})</span>
+                <a href="${fileURL}" download="${file.name}">다운로드</a>
+            `;
+
+            fileList.prepend(fileItem);
+
+            titleInput.value = '';
+            fileInput.value = '';
+            alert('학습 자료가 성공적으로 등록되었습니다! 🌿');
+        }
+
+        // 💬 메신저 톡 전송 기능
+        function sendChatMessage() {
+            const nameInput = document.getElementById('chatName');
+            const chatInput = document.getElementById('chatInput');
+            const chatRoom = document.getElementById('chatRoom');
+
+            if (!nameInput.value || !chatInput.value) {
+                alert('이름과 메시지를 모두 입력해 주세요!');
+                return;
+            }
+
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'chat-message other';
+            messageDiv.innerHTML = `
+                <span class="chat-sender">${nameInput.value}</span>
+                <div class="chat-bubble">${chatInput.value}</div>
+            `;
+
+            chatRoom.appendChild(messageDiv);
+            chatInput.value = '';
+            chatRoom.scrollTop = chatRoom.scrollHeight;
+        }
+
+        function checkEnter(event) {
+            if (event.key === 'Enter') {
+                sendChatMessage();
+            }
+        }
+
+        // 비밀 일기 제출 기능
+        function addReview() {
+            const authorInput = document.getElementById('reviewAuthor');
+            const contentInput = document.getElementById('reviewContent');
+            const reviewList = document.getElementById('reviewList');
+
+            if (!authorInput.value || !contentInput.value) {
+                alert('작성자와 내용을 모두 입력해 주세요!');
+                return;
+            }
+
+            const newDiv = document.createElement('div');
+            newDiv.className = 'post-item';
+            newDiv.innerHTML = `<strong>[제출] ${authorInput.value}</strong><br>${contentInput.value.replace(/\n/g, '<br>')}`;
+            
+            reviewList.prepend(newDiv);
+
+            authorInput.value = '';
+            contentInput.value = '';
+            alert('비밀 일기가 안전하게 제출되었습니다! 🌿');
+        }
+
+        // 선생님 비밀번호 인증 함수 (기본 비밀번호: 1234)
+        function verifyAdmin() {
+            const pwInput = document.getElementById('adminPassword').value;
+            const correctPw = "1234";
+
+            if (pwInput === correctPw) {
+                document.getElementById('adminLock').style.display = 'none';
+                document.getElementById('adminContent').style.display = 'block';
+            } else {
+                alert('비밀번호가 틀렸습니다. 다시 확인해 주세요.');
+                document.getElementById('adminPassword').value = '';
+            }
+        }
+    </script>
+</body>
+</html>
