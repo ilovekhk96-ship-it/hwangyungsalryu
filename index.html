@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>기후 위기! 인류의 미래를 지켜라</title>
-    <!-- 구글 폰트 및 아이콘 -->
+    <!-- 구글 폰트 -->
     <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -147,7 +147,7 @@
             padding-bottom: 0.5rem;
         }
 
-        /* 게시판 및 일반 폼 스타일 */
+        /* 폼 스타일 */
         .form-group {
             margin-bottom: 1rem;
         }
@@ -191,16 +191,13 @@
             border-left: 4px solid var(--sub-color);
         }
 
-        /* 📁 학습 자료실 업로드 박스 스타일 */
+        /* 파일 업로드 박스 */
         .upload-box {
             background: #f9fbfc;
             padding: 1.5rem;
             border-radius: 12px;
             border: 1px dashed #b0c4de;
             margin-bottom: 1.5rem;
-        }
-        .file-list-container {
-            margin-top: 1.5rem;
         }
         .file-item {
             display: flex;
@@ -216,11 +213,8 @@
             font-weight: 600;
             text-decoration: none;
         }
-        .file-item a:hover {
-            text-decoration: underline;
-        }
 
-        /* 💬 메신저(카톡 스타일) 전용 디자인 */
+        /* 💬 메신저 톡 디자인 */
         .chat-room {
             background-color: var(--chat-bg);
             border-radius: 12px;
@@ -241,9 +235,6 @@
         .chat-message.other {
             align-self: flex-start;
         }
-        .chat-message.my {
-            align-self: flex-end;
-        }
         .chat-sender {
             font-size: 0.85rem;
             color: #555;
@@ -255,17 +246,10 @@
             border-radius: 12px;
             font-size: 0.95rem;
             word-break: break-all;
-            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-        }
-        .chat-message.other .chat-bubble {
             background-color: var(--white);
             color: var(--text-color);
             border-top-left-radius: 2px;
-        }
-        .chat-message.my .chat-bubble {
-            background-color: #fee500;
-            color: #381e1f;
-            border-top-right-radius: 2px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
         }
         .chat-input-box {
             display: flex;
@@ -275,7 +259,7 @@
             flex: 1;
         }
 
-        /* 관리자(선생님) 전용 잠금 영역 스타일 */
+        /* 관리자(선생님) 전용 잠금 영역 */
         .admin-lock-box {
             text-align: center;
             padding: 3rem;
@@ -288,7 +272,6 @@
             margin-top: 2rem;
         }
 
-        /* 반응형 디자인 */
         @media(max-width: 768px) {
             .nav-container {
                 flex-direction: column;
@@ -354,12 +337,11 @@
             <p><strong>평가 기준:</strong> 참여도(30%), 탐구 보고서의 창의성(40%), 실천 가능성(30%)</p>
         </section>
 
-        <!-- 3. 학습 자료실 (파일 업로드 기능 추가) -->
+        <!-- 3. 학습 자료실 -->
         <section id="resources" class="section">
             <h2>학습 자료실</h2>
             <p>수업 참고 자료, 영상, 가이드 문서 등을 업로드하고 다운로드할 수 있는 공간입니다.</p>
             
-            <!-- 파일 업로드 폼 -->
             <div class="upload-box" style="margin-top: 1.5rem;">
                 <h3 style="font-size: 1.1rem; color: var(--main-color); margin-bottom: 1rem;">📤 자료 파일 업로드</h3>
                 <div class="form-group">
@@ -368,17 +350,13 @@
                 <div class="form-group">
                     <input type="file" id="fileInput" style="border: none; padding: 0;">
                 </div>
-                <button class="submit-btn" onclick="uploadFile()">자료 등록하기</button>
+                <button class="submit-btn" onclick="uploadFileToDB()">자료 등록하기</button>
             </div>
 
-            <!-- 업로드된 자료 목록 -->
             <div class="file-list-container">
                 <h3 style="font-size: 1.1rem; color: var(--text-color); margin-bottom: 1rem;">📁 등록된 학습 자료</h3>
                 <div id="fileList">
-                    <div class="file-item">
-                        <span>📄 IPCC 기후변화 보고서 요약본.pdf</span>
-                        <a href="https://www.ipcc.ch" target="_blank">다운로드/링크</a>
-                    </div>
+                    <!-- DB에서 불러온 자료가 여기에 동적으로 표시됩니다 -->
                 </div>
             </div>
         </section>
@@ -392,20 +370,13 @@
             </div>
         </section>
 
-        <!-- 5. 소통 플랫폼 (카톡 스타일 메신저) -->
+        <!-- 5. 소통 플랫폼 (메신저 톡) -->
         <section id="community" class="section">
             <h2>우리 같이 이야기 해볼까요? (메신저 톡)</h2>
             <p>동아리 부원들과 실시간으로 아이디어를 나누고 수다를 떨 수 있는 오픈 챗 공간입니다.</p>
             
             <div class="chat-room" id="chatRoom">
-                <div class="chat-message other">
-                    <span class="chat-sender">김동아</span>
-                    <div class="chat-bubble">다들 이번 주 주제 아이디어 생각해 오셨나요? 🌿</div>
-                </div>
-                <div class="chat-message other">
-                    <span class="chat-sender">이환경</span>
-                    <div class="chat-bubble">저는 북극곰 보호 캠페인 포스터로 해보면 어떨까 해요!</div>
-                </div>
+                <!-- DB에서 불러온 실시간 채팅 메시지가 여기에 쌓입니다 -->
             </div>
 
             <div class="form-group">
@@ -417,7 +388,7 @@
             </div>
         </section>
 
-        <!-- 6. 오늘의 일기 (학생 작성 공간 + 선생님 전용 확인 창) -->
+        <!-- 6. 오늘의 일기 (비밀 리뷰) -->
         <section id="review" class="section">
             <h2>오늘의 일기 (비밀 리뷰)</h2>
             <p>오늘 활동하며 느낀 점이나 선생님께 하고 싶은 비밀 이야기를 남겨주세요. (작성된 내용은 다른 학생들에게 보이지 않고 선생님만 볼 수 있습니다.)</p>
@@ -430,7 +401,7 @@
                 <div class="form-group">
                     <textarea id="reviewContent" rows="4" placeholder="오늘의 소감이나 선생님께 전하고 싶은 비밀 이야기를 적어주세요..."></textarea>
                 </div>
-                <button class="submit-btn" onclick="addReview()">비밀 일기 제출하기</button>
+                <button class="submit-btn" onclick="addReviewToDB()">비밀 일기 제출하기</button>
             </div>
 
             <div id="adminLock" class="admin-lock-box">
@@ -443,122 +414,195 @@
 
             <div id="adminContent" class="admin-content">
                 <div style="background: #e8f4f1; padding: 1rem; border-radius: 8px; margin-bottom: 1.5rem; border-left: 4px solid var(--main-color);">
-                    ✅ <strong>인증 성공!</strong> 학생들이 제출한 비밀 일기 목록입니다. (선생님만 확인 가능)
+                    ✅ <strong>인증 성공!</strong> 파이어베이스 DB에 저장된 학생들의 비밀 일기 목록입니다.
                 </div>
                 <div class="post-list" id="reviewList">
-                    <div class="post-item">
-                        <strong>[제출] 1반 홍길동</strong><br>오늘 빙하가 녹는 영상을 보니 북극곰에게 너무 미안했어요. 앞으로 분리수거를 더 열심히 해야겠다고 다짐했습니다!
-                    </div>
+                    <!-- DB에서 불러온 비밀 일기가 여기에 표시됩니다 -->
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- 자바스크립트 기능 -->
-    <script>
-        function showSection(sectionId) {
+    <!-- 🚀 파이어베이스 SDK 및 연동 스크립트 -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, collection, addDoc, getDocs, query, orderBy, onSnapshot } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        // 제공해주신 파이어베이스 설정값 적용
+        const firebaseConfig = {
+            apiKey: "AIzaSyAaM5AWJnW5CX5GccGIOSdhdMICUN8jr8E",
+            authDomain: "hwangyung.firebaseapp.com",
+            projectId: "hwangyung",
+            storageBucket: "hwangyung.firebasestorage.app",
+            messagingSenderId: "560973293174",
+            appId: "1:560973293174:web:eb4e938aaa459669356157",
+            measurementId: "G-PTJFPZKV9T"
+        };
+
+        // 파이어베이스 초기화
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // 전역 함수로 등록하여 HTML 버튼에서 호출 가능하게 설정
+        window.showSection = function(sectionId) {
             const sections = document.querySelectorAll('.section');
             sections.forEach(sec => sec.classList.remove('active'));
-            
             const target = document.getElementById(sectionId);
             if (target) {
                 target.classList.add('active');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }
-        }
+        };
 
-        // 📁 학습 자료실 파일 업로드 기능
-        function uploadFile() {
-            const titleInput = document.getElementById('fileTitle');
-            const fileInput = document.getElementById('fileInput');
-            const fileList = document.getElementById('fileList');
-
-            if (!titleInput.value || fileInput.files.length === 0) {
-                alert('자료 제목과 업로드할 파일을 모두 선택해 주세요!');
-                return;
-            }
-
-            const file = fileInput.files[0];
-            const fileURL = URL.createObjectURL(file); // 브라우저 내에서 파일을 열 수 있는 임시 링크 생성
-
-            const fileItem = document.createElement('div');
-            fileItem.className = 'file-item';
-            fileItem.innerHTML = `
-                <span>📄 ${titleInput.value} (${file.name})</span>
-                <a href="${fileURL}" download="${file.name}">다운로드</a>
-            `;
-
-            fileList.prepend(fileItem);
-
-            titleInput.value = '';
-            fileInput.value = '';
-            alert('학습 자료가 성공적으로 등록되었습니다! 🌿');
-        }
-
-        // 💬 메신저 톡 전송 기능
-        function sendChatMessage() {
-            const nameInput = document.getElementById('chatName');
-            const chatInput = document.getElementById('chatInput');
+        // 1. 소통 메신저 실시간 연동 (Firestore 실시간 수신)
+        const chatQuery = query(collection(db, "chats"), orderBy("timestamp", "asc"));
+        onSnapshot(chatQuery, (snapshot) => {
             const chatRoom = document.getElementById('chatRoom');
+            chatRoom.innerHTML = '';
+            snapshot.forEach((doc) => {
+                const data = doc.data();
+                const messageDiv = document.createElement('div');
+                messageDiv.className = 'chat-message other';
+                messageDiv.innerHTML = `
+                    <span class="chat-sender">${data.name}</span>
+                    <div class="chat-bubble">${data.message}</div>
+                `;
+                chatRoom.appendChild(messageDiv);
+            });
+            chatRoom.scrollTop = chatRoom.scrollHeight;
+        });
 
-            if (!nameInput.value || !chatInput.value) {
+        window.sendChatMessage = async function() {
+            const nameInput = document.getElementById('chatName').value;
+            const chatInput = document.getElementById('chatInput').value;
+
+            if (!nameInput || !chatInput) {
                 alert('이름과 메시지를 모두 입력해 주세요!');
                 return;
             }
 
-            const messageDiv = document.createElement('div');
-            messageDiv.className = 'chat-message other';
-            messageDiv.innerHTML = `
-                <span class="chat-sender">${nameInput.value}</span>
-                <div class="chat-bubble">${chatInput.value}</div>
-            `;
+            try {
+                await addDoc(collection(db, "chats"), {
+                    name: nameInput,
+                    message: chatInput,
+                    timestamp: new Date()
+                });
+                document.getElementById('chatInput').value = '';
+            } catch (e) {
+                console.error("채팅 전송 에러: ", e);
+                alert("전송 중 오류가 발생했습니다.");
+            }
+        };
 
-            chatRoom.appendChild(messageDiv);
-            chatInput.value = '';
-            chatRoom.scrollTop = chatRoom.scrollHeight;
-        }
-
-        function checkEnter(event) {
+        window.checkEnter = function(event) {
             if (event.key === 'Enter') {
                 sendChatMessage();
             }
+        };
+
+        // 2. 오늘의 일기 (비밀 리뷰) DB 저장 및 불러오기
+        async function loadReviews() {
+            const reviewList = document.getElementById('reviewList');
+            reviewList.innerHTML = '';
+            const q = query(collection(db, "reviews"), orderBy("timestamp", "desc"));
+            const querySnapshot = await getDocs(q);
+            querySnapshot.forEach((doc) => {
+                const data = doc.data();
+                const newDiv = document.createElement('div');
+                newDiv.className = 'post-item';
+                newDiv.innerHTML = `<strong>[제출] ${data.author}</strong><br>${data.content.replace(/\n/g, '<br>')}`;
+                reviewList.appendChild(newDiv);
+            });
         }
 
-        // 비밀 일기 제출 기능
-        function addReview() {
-            const authorInput = document.getElementById('reviewAuthor');
-            const contentInput = document.getElementById('reviewContent');
-            const reviewList = document.getElementById('reviewList');
+        window.addReviewToDB = async function() {
+            const authorInput = document.getElementById('reviewAuthor').value;
+            const contentInput = document.getElementById('reviewContent').value;
 
-            if (!authorInput.value || !contentInput.value) {
+            if (!authorInput || !contentInput) {
                 alert('작성자와 내용을 모두 입력해 주세요!');
                 return;
             }
 
-            const newDiv = document.createElement('div');
-            newDiv.className = 'post-item';
-            newDiv.innerHTML = `<strong>[제출] ${authorInput.value}</strong><br>${contentInput.value.replace(/\n/g, '<br>')}`;
-            
-            reviewList.prepend(newDiv);
+            try {
+                await addDoc(collection(db, "reviews"), {
+                    author: authorInput,
+                    content: contentInput,
+                    timestamp: new Date()
+                });
+                document.getElementById('reviewAuthor').value = '';
+                document.getElementById('reviewContent').value = '';
+                alert('비밀 일기가 파이어베이스 DB에 안전하게 저장되었습니다! 🌿');
+                loadReviews();
+            } catch (e) {
+                console.error("일기 저장 에러: ", e);
+                alert("저장 중 오류가 발생했습니다.");
+            }
+        };
 
-            authorInput.value = '';
-            contentInput.value = '';
-            alert('비밀 일기가 안전하게 제출되었습니다! 🌿');
+        // 3. 학습 자료실 DB 연동
+        async function loadFiles() {
+            const fileList = document.getElementById('fileList');
+            fileList.innerHTML = '';
+            const q = query(collection(db, "files"), orderBy("timestamp", "desc"));
+            const querySnapshot = await getDocs(q);
+            querySnapshot.forEach((doc) => {
+                const data = doc.data();
+                const fileItem = document.createElement('div');
+                fileItem.className = 'file-item';
+                fileItem.innerHTML = `
+                    <span>📄 ${data.title}</span>
+                    <a href="${data.fileUrl}" target="_blank">열기/다운로드</a>
+                `;
+                fileList.appendChild(fileItem);
+            });
         }
 
-        // 선생님 비밀번호 인증 함수 (기본 비밀번호: 1234)
-        function verifyAdmin() {
+        window.uploadFileToDB = async function() {
+            const titleInput = document.getElementById('fileTitle').value;
+            const fileInput = document.getElementById('fileInput');
+
+            if (!titleInput || fileInput.files.length === 0) {
+                alert('자료 제목과 파일을 모두 선택해 주세요!');
+                return;
+            }
+
+            const file = fileInput.files[0];
+            const fileURL = URL.createObjectURL(file); // 임시 링크 생성 (추후 파이어바이스 Storage 연동 확장 가능)
+
+            try {
+                await addDoc(collection(db, "files"), {
+                    title: `${titleInput} (${file.name})`,
+                    fileUrl: fileURL,
+                    timestamp: new Date()
+                });
+                document.getElementById('fileTitle').value = '';
+                fileInput.value = '';
+                alert('자료가 등록되었습니다! 🌿');
+                loadFiles();
+            } catch (e) {
+                console.error("파일 등록 에러: ", e);
+                alert("등록 중 오류가 발생했습니다.");
+            }
+        };
+
+        // 4. 선생님 관리자 인증
+        window.verifyAdmin = function() {
             const pwInput = document.getElementById('adminPassword').value;
-            const correctPw = "1234";
+            const correctPw = "1234"; // 선생님 비밀번호
 
             if (pwInput === correctPw) {
                 document.getElementById('adminLock').style.display = 'none';
                 document.getElementById('adminContent').style.display = 'block';
+                loadReviews(); // 관리자 모드 진입 시 최신 일기 불러오기
             } else {
                 alert('비밀번호가 틀렸습니다. 다시 확인해 주세요.');
                 document.getElementById('adminPassword').value = '';
             }
-        }
+        };
+
+        // 페이지 최초 로딩 시 자료실 목록 불러오기
+        loadFiles();
     </script>
 </body>
 </html>
