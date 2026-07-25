@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>기후 위기! 인류의 미래를 지켜라</title>
-    <!-- 구글 폰트 -->
+    <title>기후 위기! 인류의 미래를 지켜라 - 메인</title>
     <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -14,595 +13,243 @@
             --text-color: #2f3e46;
             --white: #ffffff;
             --accent-fire: #e07a5f;
-            --accent-ice: #81b29a;
-            --chat-bg: #e2ecf4;
         }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Pretendard', sans-serif;
-        }
-
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            position: relative;
-        }
-
-        /* 배경 경각심 이모지 효과 */
-        .eco-bg-elements {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-            opacity: 0.15;
-            overflow: hidden;
-        }
-        .floating-emoji {
-            position: absolute;
-            font-size: 2rem;
-            animation: float 10s infinite alternate ease-in-out;
-        }
-        @keyframes float {
-            0% { transform: translateY(0px) rotate(0deg); }
-            100% { transform: translateY(-30px) rotate(15deg); }
-        }
-
-        /* 헤더 및 네비게이션 */
-        header {
-            background-color: var(--white);
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 2rem;
-        }
-        .logo {
-            font-weight: 700;
-            font-size: 1.2rem;
-            color: var(--main-color);
-        }
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 1.5rem;
-        }
-        nav ul li a {
-            text-decoration: none;
-            color: var(--text-color);
-            font-weight: 600;
-            cursor: pointer;
-            transition: color 0.2s;
-        }
-        nav ul li a:hover {
-            color: var(--main-color);
-        }
-
-        /* 메인 컨테이너 */
-        main {
-            max-width: 1000px;
-            margin: 2rem auto;
-            padding: 0 1rem;
-        }
-
-        .section {
-            display: none;
-            background: var(--white);
-            padding: 2.5rem;
-            border-radius: 16px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
-            margin-bottom: 2rem;
-        }
-        .section.active {
-            display: block;
-        }
-
-        /* 메인 홈 화면 스타일 */
-        .hero {
-            text-align: center;
-            padding: 4rem 2rem;
-            background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(240,244,248,0.9)), url('https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?auto=format&fit=crop&w=1200&q=80') no-repeat center center/cover;
-            border-radius: 16px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-        }
-        .hero h1 {
-            font-size: 2.5rem;
-            color: var(--text-color);
-            margin-bottom: 1rem;
-        }
-        .hero p {
-            font-size: 1.2rem;
-            color: #555;
-            margin-bottom: 2rem;
-        }
-        .hero-badge {
-            display: inline-block;
-            background: var(--accent-fire);
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-weight: 600;
-            margin-bottom: 1rem;
-        }
-
-        /* 공통 타이틀 */
-        h2 {
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            color: var(--main-color);
-            border-bottom: 2px solid #eee;
-            padding-bottom: 0.5rem;
-        }
-
-        /* 폼 스타일 */
-        .form-group {
-            margin-bottom: 1rem;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-        }
-        .form-group input, .form-group textarea {
-            width: 100%;
-            padding: 0.8rem;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 1rem;
-        }
-        button.submit-btn {
-            background-color: var(--main-color);
-            color: white;
-            border: none;
-            padding: 0.8rem 1.5rem;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-        button.submit-btn:hover {
-            background-color: #436456;
-        }
-
-        .post-list {
-            margin-top: 2rem;
-            border-top: 1px solid #eee;
-            padding-top: 1rem;
-        }
-        .post-item {
-            background: #f9fbfc;
-            padding: 1rem;
-            border-radius: 8px;
-            margin-bottom: 1rem;
-            border-left: 4px solid var(--sub-color);
-        }
-
-        /* 파일 업로드 박스 */
-        .upload-box {
-            background: #f9fbfc;
-            padding: 1.5rem;
-            border-radius: 12px;
-            border: 1px dashed #b0c4de;
-            margin-bottom: 1.5rem;
-        }
-        .file-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: #f0f4f8;
-            padding: 0.8rem 1rem;
-            border-radius: 8px;
-            margin-bottom: 0.8rem;
-        }
-        .file-item a {
-            color: var(--main-color);
-            font-weight: 600;
-            text-decoration: none;
-        }
-
-        /* 💬 메신저 톡 디자인 */
-        .chat-room {
-            background-color: var(--chat-bg);
-            border-radius: 12px;
-            padding: 1.5rem;
-            height: 400px;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-            border: 1px solid #d0dee8;
-        }
-        .chat-message {
-            display: flex;
-            flex-direction: column;
-            max-width: 75%;
-        }
-        .chat-message.other {
-            align-self: flex-start;
-        }
-        .chat-sender {
-            font-size: 0.85rem;
-            color: #555;
-            margin-bottom: 0.2rem;
-            font-weight: 600;
-        }
-        .chat-bubble {
-            padding: 0.8rem 1rem;
-            border-radius: 12px;
-            font-size: 0.95rem;
-            word-break: break-all;
-            background-color: var(--white);
-            color: var(--text-color);
-            border-top-left-radius: 2px;
-            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-        }
-        .chat-input-box {
-            display: flex;
-            gap: 0.5rem;
-        }
-        .chat-input-box input {
-            flex: 1;
-        }
-
-        /* 관리자(선생님) 전용 잠금 영역 */
-        .admin-lock-box {
-            text-align: center;
-            padding: 3rem;
-            background: #f0f4f8;
-            border-radius: 12px;
-            margin-top: 2rem;
-        }
-        .admin-content {
-            display: none;
-            margin-top: 2rem;
-        }
-
-        @media(max-width: 768px) {
-            .nav-container {
-                flex-direction: column;
-                gap: 1rem;
-            }
-            nav ul {
-                gap: 1rem;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            .hero h1 {
-                font-size: 1.8rem;
-            }
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Pretendard', sans-serif; }
+        body { background-color: var(--bg-color); color: var(--text-color); display: flex; justify-content: center; align-items: center; height: 100vh; }
+        .container { text-align: center; background: var(--white); padding: 3rem; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); max-width: 500px; width: 100%; }
+        h1 { font-size: 2rem; color: var(--main-color); margin-bottom: 1rem; }
+        p { color: #666; margin-bottom: 2rem; }
+        .btn-group { display: flex; gap: 1rem; justify-content: center; }
+        .role-btn { padding: 1rem 2rem; border-radius: 12px; font-size: 1.1rem; font-weight: 600; cursor: pointer; text-decoration: none; transition: transform 0.2s; border: none; }
+        .role-btn.student { background-color: var(--sub-color); color: white; }
+        .role-btn.teacher { background-color: var(--main-color); color: white; }
+        .role-btn:hover { transform: translateY(-3px); }
     </style>
 </head>
 <body>
-
-    <!-- 배경 경각심 요소 -->
-    <div class="eco-bg-elements">
-        <div class="floating-emoji" style="top: 10%; left: 5%;">🐻‍❄️</div>
-        <div class="floating-emoji" style="top: 20%; right: 10%;">🔥</div>
-        <div class="floating-emoji" style="top: 60%; left: 8%;">🧊</div>
-        <div class="floating-emoji" style="top: 80%; right: 15%;">🌲🔥</div>
-        <div class="floating-emoji" style="top: 40%; left: 85%;">🌍</div>
+    <div class="container">
+        <h1>🌿 기후 위기 프로젝트</h1>
+        <p>인류의 미래를 지키기 위한 탐구 플랫폼에 오신 것을 환영합니다. 접속할 화면을 선택해 주세요.</p>
+        <div class="btn-group">
+            <a href="student/index.html" class="role-btn student">👨‍🎓 학생 화면</a>
+            <a href="teacher/index.html" class="role-btn teacher">👩‍🏫 교사 화면</a>
+        </div>
     </div>
+</body>
+</html>
+// shared/firebase.js
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+import { getFirestore, collection, addDoc, getDocs, query, orderBy, onSnapshot, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-    <!-- 헤더 내비게이션 -->
+const firebaseConfig = {
+    apiKey: "AIzaSyAaM5AWJnW5CX5GccGIOSdhdMICUN8jr8E",
+    authDomain: "hwangyung.firebaseapp.com",
+    projectId: "hwangyung",
+    storageBucket: "hwangyung.firebasestorage.app",
+    messagingSenderId: "560973293174",
+    appId: "1:560973293174:web:eb4e938aaa459669356157",
+    measurementId: "G-PTJFPZKV9T"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+const googleProvider = new GoogleAuthProvider();
+
+export { auth, db, googleProvider, signInWithPopup, signOut, onAuthStateChanged, collection, addDoc, getDocs, query, orderBy, onSnapshot, doc, getDoc };
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>기후 위기 프로젝트 - 학생 공간</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --bg-color: #f7f9fc; --main-color: #5c8374; --sub-color: #93b5c6; --text-color: #2f3e46; --white: #ffffff; --chat-bg: #e2ecf4; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Pretendard', sans-serif; }
+        body { background-color: var(--bg-color); color: var(--text-color); line-height: 1.6; }
+        header { background-color: var(--white); box-shadow: 0 2px 5px rgba(0,0,0,0.05); padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-weight: 700; color: var(--main-color); }
+        main { max-width: 900px; margin: 2rem auto; padding: 0 1rem; }
+        .card { background: var(--white); padding: 2rem; border-radius: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); margin-bottom: 2rem; }
+        h2 { color: var(--main-color); margin-bottom: 1rem; border-bottom: 2px solid #eee; padding-bottom: 0.5rem; }
+        .form-group { margin-bottom: 1rem; }
+        .form-group input, .form-group textarea { width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 8px; font-size: 1rem; }
+        button.submit-btn { background-color: var(--main-color); color: white; border: none; padding: 0.8rem 1.5rem; border-radius: 8px; font-weight: 600; cursor: pointer; }
+        
+        /* 채팅창 스타일 */
+        .chat-room { background-color: var(--chat-bg); border-radius: 12px; padding: 1.5rem; height: 350px; overflow-y: auto; display: flex; flex-direction: column; gap: 1rem; margin-bottom: 1rem; border: 1px solid #d0dee8; }
+        .chat-message { display: flex; flex-direction: column; max-width: 75%; }
+        .chat-sender { font-size: 0.85rem; color: #555; margin-bottom: 0.2rem; font-weight: 600; }
+        .chat-bubble { padding: 0.8rem 1rem; border-radius: 12px; background-color: var(--white); box-shadow: 0 1px 2px rgba(0,0,0,0.05); word-break: break-all; }
+        .chat-input-box { display: flex; gap: 0.5rem; }
+        
+        .file-item { display: flex; justify-content: space-between; background: #f0f4f8; padding: 0.8rem; border-radius: 8px; margin-bottom: 0.5rem; }
+        .file-item a { color: var(--main-color); font-weight: 600; text-decoration: none; }
+    </style>
+</head>
+<body>
     <header>
-        <div class="nav-container">
-            <div class="logo">🌿 기후위기 탐구반</div>
-            <nav>
-                <ul>
-                    <li><a onclick="showSection('home')">메인 페이지</a></li>
-                    <li><a onclick="showSection('guide')">탐구 안내</a></li>
-                    <li><a onclick="showSection('resources')">학습 자료실</a></li>
-                    <li><a onclick="showSection('gallery')">탐구 결과물</a></li>
-                    <li><a onclick="showSection('community')">소통 플랫폼</a></li>
-                    <li><a onclick="showSection('review')">오늘의 일기</a></li>
-                </ul>
-            </nav>
+        <div class="logo">👨‍🎓 학생 탐구 공간</div>
+        <div>
+            <span id="userDisplay" style="margin-right: 1rem; font-weight: 600;">로그인이 필요합니다</span>
+            <button id="authBtn" class="submit-btn" style="padding: 0.5rem 1rem;">구글 로그인</button>
         </div>
     </header>
 
-    <!-- 콘텐츠 영역 -->
     <main>
-        <!-- 1. 메인 페이지 -->
-        <section id="home" class="section active">
-            <div class="hero">
-                <div class="hero-badge">🦸‍♀️ 슈퍼우먼의 지구 구하기 프로젝트</div>
-                <h1>기후 위기! 인류의 미래를 지켜라</h1>
-                <p>고등학교 1학년 환경 동아리 부원들과 함께하는 우리들의 진지한 지구 살리기 여정</p>
-            </div>
-        </section>
-
-        <!-- 2. 탐구 안내 -->
-        <section id="guide" class="section">
-            <h2>탐구 안내</h2>
-            <p><strong>주제 설명:</strong> 현재 지구 곳곳에서 발생하는 기후 변화의 원인을 분석하고, 우리가 실천할 수 있는 해결 방안을 모색합니다.</p>
-            <br>
-            <p><strong>진행 일정:</strong> 3월 ~ 7월 (단계별 모둠 활동 및 최종 발표 진행)</p>
-            <br>
-            <p><strong>평가 기준:</strong> 참여도(30%), 탐구 보고서의 창의성(40%), 실천 가능성(30%)</p>
-        </section>
-
-        <!-- 3. 학습 자료실 -->
-        <section id="resources" class="section">
-            <h2>학습 자료실</h2>
-            <p>수업 참고 자료, 영상, 가이드 문서 등을 업로드하고 다운로드할 수 있는 공간입니다.</p>
-            
-            <div class="upload-box" style="margin-top: 1.5rem;">
-                <h3 style="font-size: 1.1rem; color: var(--main-color); margin-bottom: 1rem;">📤 자료 파일 업로드</h3>
-                <div class="form-group">
-                    <input type="text" id="fileTitle" placeholder="자료 제목 입력 (예: 1주차 기후변화 리포트)">
-                </div>
-                <div class="form-group">
-                    <input type="file" id="fileInput" style="border: none; padding: 0;">
-                </div>
-                <button class="submit-btn" onclick="uploadFileToDB()">자료 등록하기</button>
-            </div>
-
-            <div class="file-list-container">
-                <h3 style="font-size: 1.1rem; color: var(--text-color); margin-bottom: 1rem;">📁 등록된 학습 자료</h3>
-                <div id="fileList">
-                    <!-- DB에서 불러온 자료가 여기에 동적으로 표시됩니다 -->
-                </div>
-            </div>
-        </section>
-
-        <!-- 4. 학생 탐구 결과물 (갤러리) -->
-        <section id="gallery" class="section">
-            <h2>학생 탐구 결과물 / 갤러리</h2>
-            <p>동아리 부원들이 작성한 포스터, 보고서, 활동 사진을 전시하는 공간입니다.</p>
-            <div style="margin-top: 1.5rem; text-align: center; padding: 3rem; background: #f0f4f8; border-radius: 8px; color: #666;">
-                📸 첫 번째 모둠 결과물이 곧 업로드될 예정입니다!
-            </div>
-        </section>
-
-        <!-- 5. 소통 플랫폼 (메신저 톡) -->
-        <section id="community" class="section">
-            <h2>우리 같이 이야기 해볼까요? (메신저 톡)</h2>
-            <p>동아리 부원들과 실시간으로 아이디어를 나누고 수다를 떨 수 있는 오픈 챗 공간입니다.</p>
-            
-            <div class="chat-room" id="chatRoom">
-                <!-- DB에서 불러온 실시간 채팅 메시지가 여기에 쌓입니다 -->
-            </div>
-
+        <!-- 학습 자료실 -->
+        <section class="card">
+            <h2>📁 학습 자료실 (파일 및 링크 공유)</h2>
             <div class="form-group">
-                <input type="text" id="chatName" placeholder="이름 (예: 1반 김철수)" style="max-width: 200px; margin-bottom: 0.5rem;">
+                <input type="text" id="fileTitle" placeholder="자료 제목 또는 설명 입력">
+            </div>
+            <div class="form-group">
+                <input type="text" id="fileLink" placeholder="공유할 파일 링크 (구글 드라이브, 노션, 웹링크 등 입력)">
+            </div>
+            <button class="submit-btn" onclick="uploadData()">자료 등록하기</button>
+            
+            <div style="margin-top: 1.5rem;" id="fileList">
+                <!-- 자료 목록 표시 -->
+            </div>
+        </section>
+
+        <!-- 실시간 저장되는 소통 톡 -->
+        <section class="card">
+            <h2>💬 우리 같이 이야기 해볼까요? (메신저 톡)</h2>
+            <div class="chat-room" id="chatRoom">
+                <!-- 이전 대화 내용이 실시간으로 로드됨 -->
             </div>
             <div class="chat-input-box">
-                <input type="text" id="chatInput" placeholder="메시지를 입력하세요..." onkeypress="checkEnter(event)">
-                <button class="submit-btn" onclick="sendChatMessage()">전송</button>
+                <input type="text" id="chatInput" placeholder="메시지를 입력하세요..." onkeypress="if(event.key==='Enter') sendChat()">
+                <button class="submit-btn" onclick="sendChat()">전송</button>
             </div>
         </section>
 
-        <!-- 6. 오늘의 일기 (비밀 리뷰) -->
-        <section id="review" class="section">
-            <h2>오늘의 일기 (비밀 리뷰)</h2>
-            <p>오늘 활동하며 느낀 점이나 선생님께 하고 싶은 비밀 이야기를 남겨주세요. (작성된 내용은 다른 학생들에게 보이지 않고 선생님만 볼 수 있습니다.)</p>
-            
-            <div style="background: #f9fbfc; padding: 1.5rem; border-radius: 12px; margin-top: 1.5rem; border: 1px solid #e1e8ed;">
-                <h3 style="font-size: 1.1rem; color: var(--main-color); margin-bottom: 1rem;">✍️ 일기 작성하기</h3>
-                <div class="form-group">
-                    <input type="text" id="reviewAuthor" placeholder="작성자 이름 (예: 1반 김환경)">
-                </div>
-                <div class="form-group">
-                    <textarea id="reviewContent" rows="4" placeholder="오늘의 소감이나 선생님께 전하고 싶은 비밀 이야기를 적어주세요..."></textarea>
-                </div>
-                <button class="submit-btn" onclick="addReviewToDB()">비밀 일기 제출하기</button>
+        <!-- 오늘의 일기 제출 -->
+        <section class="card">
+            <h2>✍️ 오늘의 일기 (선생님만 보는 비밀 리뷰)</h2>
+            <div class="form-group">
+                <textarea id="diaryContent" rows="4" placeholder="오늘 활동 소감이나 선생님께 전하고 싶은 비밀 이야기를 적어주세요..."></textarea>
             </div>
-
-            <div id="adminLock" class="admin-lock-box">
-                <p style="margin-bottom: 1rem; font-weight: 600;">🔒 [선생님 전용] 제출된 일기 목록을 확인하려면 비밀번호를 입력하세요.</p>
-                <div class="form-group" style="max-width: 300px; margin: 0 auto 1rem auto;">
-                    <input type="password" id="adminPassword" placeholder="비밀번호 입력">
-                </div>
-                <button class="submit-btn" onclick="verifyAdmin()">선생님 모드 열기</button>
-            </div>
-
-            <div id="adminContent" class="admin-content">
-                <div style="background: #e8f4f1; padding: 1rem; border-radius: 8px; margin-bottom: 1.5rem; border-left: 4px solid var(--main-color);">
-                    ✅ <strong>인증 성공!</strong> 파이어베이스 DB에 저장된 학생들의 비밀 일기 목록입니다.
-                </div>
-                <div class="post-list" id="reviewList">
-                    <!-- DB에서 불러온 비밀 일기가 여기에 표시됩니다 -->
-                </div>
-            </div>
+            <button class="submit-btn" onclick="submitDiary()">비밀 일기 제출하기</button>
         </section>
     </main>
 
-    <!-- 🚀 파이어베이스 SDK 및 연동 스크립트 -->
     <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getFirestore, collection, addDoc, getDocs, query, orderBy, onSnapshot } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        import { auth, db, googleProvider, signInWithPopup, signOut, onAuthStateChanged, collection, addDoc, query, orderBy, onSnapshot } from "../shared/firebase.js";
 
-        // 제공해주신 파이어베이스 설정값 적용
-        const firebaseConfig = {
-            apiKey: "AIzaSyAaM5AWJnW5CX5GccGIOSdhdMICUN8jr8E",
-            authDomain: "hwangyung.firebaseapp.com",
-            projectId: "hwangyung",
-            storageBucket: "hwangyung.firebasestorage.app",
-            messagingSenderId: "560973293174",
-            appId: "1:560973293174:web:eb4e938aaa459669356157",
-            measurementId: "G-PTJFPZKV9T"
-        };
+        let currentUser = null;
 
-        // 파이어베이스 초기화
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
+        // 로그인 상태 관리
+        const authBtn = document.getElementById('authBtn');
+        const userDisplay = document.getElementById('userDisplay');
 
-        // 전역 함수로 등록하여 HTML 버튼에서 호출 가능하게 설정
-        window.showSection = function(sectionId) {
-            const sections = document.querySelectorAll('.section');
-            sections.forEach(sec => sec.classList.remove('active'));
-            const target = document.getElementById(sectionId);
-            if (target) {
-                target.classList.add('active');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+        authBtn.addEventListener('click', async () => {
+            if (!currentUser) {
+                try {
+                    await signInWithPopup(auth, googleProvider);
+                } catch (e) {
+                    alert("로그인 실패: " + e.message);
+                }
+            } else {
+                await signOut(auth);
             }
-        };
+        });
 
-        // 1. 소통 메신저 실시간 연동 (Firestore 실시간 수신)
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                currentUser = user;
+                userDisplay.textContent = `${user.displayName} (${user.email})`;
+                authBtn.textContent = "로그아웃";
+            } else {
+                currentUser = null;
+                userDisplay.textContent = "로그인이 필요합니다";
+                authBtn.textContent = "구글 로그인";
+            }
+        });
+
+        // 1. 소통 톡 (이전 대화 저장 및 실시간 불러오기)
         const chatQuery = query(collection(db, "chats"), orderBy("timestamp", "asc"));
         onSnapshot(chatQuery, (snapshot) => {
             const chatRoom = document.getElementById('chatRoom');
             chatRoom.innerHTML = '';
             snapshot.forEach((doc) => {
                 const data = doc.data();
-                const messageDiv = document.createElement('div');
-                messageDiv.className = 'chat-message other';
-                messageDiv.innerHTML = `
+                const msgDiv = document.createElement('div');
+                msgDiv.className = 'chat-message';
+                msgDiv.innerHTML = `
                     <span class="chat-sender">${data.name}</span>
                     <div class="chat-bubble">${data.message}</div>
                 `;
-                chatRoom.appendChild(messageDiv);
+                chatRoom.appendChild(msgDiv);
             });
             chatRoom.scrollTop = chatRoom.scrollHeight;
         });
 
-        window.sendChatMessage = async function() {
-            const nameInput = document.getElementById('chatName').value;
-            const chatInput = document.getElementById('chatInput').value;
+        window.sendChat = async function() {
+            if (!currentUser) { alert("로그인 후 이용 가능합니다."); return; }
+            const input = document.getElementById('chatInput');
+            if (!input.value.trim()) return;
 
-            if (!nameInput || !chatInput) {
-                alert('이름과 메시지를 모두 입력해 주세요!');
-                return;
-            }
-
-            try {
-                await addDoc(collection(db, "chats"), {
-                    name: nameInput,
-                    message: chatInput,
-                    timestamp: new Date()
-                });
-                document.getElementById('chatInput').value = '';
-            } catch (e) {
-                console.error("채팅 전송 에러: ", e);
-                alert("전송 중 오류가 발생했습니다.");
-            }
-        };
-
-        window.checkEnter = function(event) {
-            if (event.key === 'Enter') {
-                sendChatMessage();
-            }
-        };
-
-        // 2. 오늘의 일기 (비밀 리뷰) DB 저장 및 불러오기
-        async function loadReviews() {
-            const reviewList = document.getElementById('reviewList');
-            reviewList.innerHTML = '';
-            const q = query(collection(db, "reviews"), orderBy("timestamp", "desc"));
-            const querySnapshot = await getDocs(q);
-            querySnapshot.forEach((doc) => {
-                const data = doc.data();
-                const newDiv = document.createElement('div');
-                newDiv.className = 'post-item';
-                newDiv.innerHTML = `<strong>[제출] ${data.author}</strong><br>${data.content.replace(/\n/g, '<br>')}`;
-                reviewList.appendChild(newDiv);
+            await addDoc(collection(db, "chats"), {
+                name: currentUser.displayName || "학생",
+                message: input.value,
+                timestamp: new Date()
             });
-        }
-
-        window.addReviewToDB = async function() {
-            const authorInput = document.getElementById('reviewAuthor').value;
-            const contentInput = document.getElementById('reviewContent').value;
-
-            if (!authorInput || !contentInput) {
-                alert('작성자와 내용을 모두 입력해 주세요!');
-                return;
-            }
-
-            try {
-                await addDoc(collection(db, "reviews"), {
-                    author: authorInput,
-                    content: contentInput,
-                    timestamp: new Date()
-                });
-                document.getElementById('reviewAuthor').value = '';
-                document.getElementById('reviewContent').value = '';
-                alert('비밀 일기가 파이어베이스 DB에 안전하게 저장되었습니다! 🌿');
-                loadReviews();
-            } catch (e) {
-                console.error("일기 저장 에러: ", e);
-                alert("저장 중 오류가 발생했습니다.");
-            }
+            input.value = '';
         };
 
-        // 3. 학습 자료실 DB 연동
-        async function loadFiles() {
+        // 2. 학습 자료실 (링크 및 텍스트 기반 안정적 저장)
+        const fileQuery = query(collection(db, "files"), orderBy("timestamp", "desc"));
+        onSnapshot(fileQuery, (snapshot) => {
             const fileList = document.getElementById('fileList');
             fileList.innerHTML = '';
-            const q = query(collection(db, "files"), orderBy("timestamp", "desc"));
-            const querySnapshot = await getDocs(q);
-            querySnapshot.forEach((doc) => {
+            snapshot.forEach((doc) => {
                 const data = doc.data();
-                const fileItem = document.createElement('div');
-                fileItem.className = 'file-item';
-                fileItem.innerHTML = `
-                    <span>📄 ${data.title}</span>
-                    <a href="${data.fileUrl}" target="_blank">열기/다운로드</a>
+                const item = document.createElement('div');
+                item.className = 'file-item';
+                item.innerHTML = `
+                    <span>📄 <strong>${data.title}</strong> (${data.uploader})</span>
+                    <a href="${data.link}" target="_blank">자료 열기</a>
                 `;
-                fileList.appendChild(fileItem);
+                fileList.appendChild(item);
             });
-        }
+        });
 
-        window.uploadFileToDB = async function() {
-            const titleInput = document.getElementById('fileTitle').value;
-            const fileInput = document.getElementById('fileInput');
+        window.uploadData = async function() {
+            if (!currentUser) { alert("로그인 후 이용 가능합니다."); return; }
+            const title = document.getElementById('fileTitle').value;
+            const link = document.getElementById('fileLink').value;
+            if (!title || !link) { alert("제목과 링크를 모두 입력해 주세요!"); return; }
 
-            if (!titleInput || fileInput.files.length === 0) {
-                alert('자료 제목과 파일을 모두 선택해 주세요!');
-                return;
-            }
-
-            const file = fileInput.files[0];
-            const fileURL = URL.createObjectURL(file); // 임시 링크 생성 (추후 파이어바이스 Storage 연동 확장 가능)
-
-            try {
-                await addDoc(collection(db, "files"), {
-                    title: `${titleInput} (${file.name})`,
-                    fileUrl: fileURL,
-                    timestamp: new Date()
-                });
-                document.getElementById('fileTitle').value = '';
-                fileInput.value = '';
-                alert('자료가 등록되었습니다! 🌿');
-                loadFiles();
-            } catch (e) {
-                console.error("파일 등록 에러: ", e);
-                alert("등록 중 오류가 발생했습니다.");
-            }
+            await addDoc(collection(db, "files"), {
+                title: title,
+                link: link,
+                uploader: currentUser.displayName,
+                timestamp: new Date()
+            });
+            document.getElementById('fileTitle').value = '';
+            document.getElementById('fileLink').value = '';
+            alert("자료가 등록되었습니다!");
         };
 
-        // 4. 선생님 관리자 인증
-        window.verifyAdmin = function() {
-            const pwInput = document.getElementById('adminPassword').value;
-            const correctPw = "1234"; // 선생님 비밀번호
+        // 3. 비밀 일기 제출
+        window.submitDiary = async function() {
+            if (!currentUser) { alert("로그인 후 이용 가능합니다."); return; }
+            const content = document.getElementById('diaryContent').value;
+            if (!content.trim()) { alert("내용을 입력해 주세요!"); return; }
 
-            if (pwInput === correctPw) {
-                document.getElementById('adminLock').style.display = 'none';
-                document.getElementById('adminContent').style.display = 'block';
-                loadReviews(); // 관리자 모드 진입 시 최신 일기 불러오기
-            } else {
-                alert('비밀번호가 틀렸습니다. 다시 확인해 주세요.');
-                document.getElementById('adminPassword').value = '';
-            }
+            await addDoc(collection(db, "reviews"), {
+                author: currentUser.displayName,
+                email: currentUser.email,
+                content: content,
+                timestamp: new Date()
+            });
+            document.getElementById('diaryContent').value = '';
+            alert("비밀 일기가 선생님께 안전하게 제출되었습니다!");
         };
-
-        // 페이지 최초 로딩 시 자료실 목록 불러오기
-        loadFiles();
     </script>
 </body>
 </html>
